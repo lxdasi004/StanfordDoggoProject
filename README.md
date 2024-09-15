@@ -1,16 +1,38 @@
 ![hero](https://github.com/Nate711/StanfordDoggoProject/blob/master/images/hero.jpg)
 
+# End-of-life notice
+Thank you everyone for your interest and support over the last 6 years for this project! 
+
+We are hard at work building a new robot, Pupper v3, and so would like to stop supporting this project. Thanks for your understanding! Pupper v3 is fully open source and build instructions will be released in the coming months. You can find preliminary information here https://pupper-v3-documentation.readthedocs.io/en/latest/index.html 
+
+![20240701_232332](https://github.com/stanfordroboticsclub/StanfordQuadruped/assets/1295426/96d09d2b-9d99-4a0b-b30b-6e317d7b286b)
+
+![20240701_231506](https://github.com/stanfordroboticsclub/StanfordQuadruped/assets/1295426/d9875ccf-be3f-496c-a22b-aaab4f5fc9fd)
+
+![IMG_2942](https://github.com/stanfordroboticsclub/StanfordQuadruped/assets/1295426/c6f1de38-a013-402b-a1e2-f924573ec48e)
+
+Quick specs for Pupper v3
+* Powerful 400W GIM4305 brushless motors
+* Raspberry Pi 5
+* Reinforcement learning locomotion policy out-of-the-box
+* Luxonis SR depth camera
+* LCD screen for debugging and facial expressions
+* Roughly $1000 BOM
+
+
 # The Stanford Doggo Project
 ## Overview Of Stanford Doggo
-Stanford Doggo is a highly agile robot designed to provide an accessible platform for legged robot research. Currently, the robot holds the record (among all robots) for greatest vertical jumping agility<sup>1</sup>. Stanford Doggo can also jump twice as high as any existing quadruped robot. Weighing in at a little less than 5kg, Stanford Doggo is easy and safe to develop on, but at the same time, Stanford Doggo should not be expected to carry heavy loads or climb extremely aggressive terrain. If you use a portion of this project or want further technical details, please cite our paper presented at ICRA 2019: https://arxiv.org/abs/1905.04254. The project is supported by Stanford Student Robotics http://roboticsclub.stanford.edu/.
+Stanford Doggo is a highly agile robot designed to be an accessible platform for legged robot research. The robot currently holds the record (among all robots) for the highest vertical jumping agility<sup>1</sup> and can jump twice as high as any existing quadruped robot! Weighing in at a little less than 5kg, Stanford Doggo is easy and safe to develop on, but at the same time, don't expect Stanford Doggo to carry heavy loads or climb super aggressive terrain. If you use a portion of this project or want further technical details, please cite our paper presented at ICRA 2019: https://ieeexplore.ieee.org/document/8794436 (freely available on arxiv: https://arxiv.org/abs/1905.04254). The project is generously supported by Stanford Student Robotics http://roboticsclub.stanford.edu/.
 
 <sup>1</sup>[Vertical jumping agility] = [maximum vertical jump height] / [time from onset of actuation to apogee of jump]
 
 ## Building Doggo
-We want you to be able to build your own Stanford Doggo without a hassle. To this end, we've uploaded the entire CAD model under the Hardware folder. The design was completed in Fusion 360 and includes all the mechanical parts you'll need to source. Many of the custom pieces are either 3d printed or waterjet, which means you will only have to do post-processing work. For example, the primary links on each leg assembly (which are waterjet) require you to drill a hole for a set screw and then tap it. For now, if you need help, please reference the CAD or submit an issue to this github repo. You can find a WIP BOM here: https://docs.google.com/spreadsheets/d/1MQRoZCfsMdJhHQ-ht6YvhzNvye6xDXO8vhWQql2HtlI/edit#gid=726381752. We understand that at this moment, it may be quite frustrating to build Doggo yourself. Part of the reason is that we're working on a bigger and better version of Doggo that may make this version obsolete. However, we will continue to support this version Stanford Doggo and will continue to upload resources to make this project more accessible. Please do not hesitate to ask for individual help!
+We hope you build your own Stanford Doggo! In the Hardware folder of this repository we've linked the Fusion 360 CAD model and it includes all the parts you'll need to source. Many of the custom pieces are either 3d printed or waterjet (instead of manually milled for instance), which means you will only have to do post-processing work. For example, the primary links on each waterjet leg assembly require you to drill and tap a hole for a set screw. If you need help, please reference the CAD, submit an issue to this github repo, or email the owner, nathan kau [at] stanford [dot edu].
+
+You can find a work-in-progress bill of materials here: https://docs.google.com/spreadsheets/d/1MQRoZCfsMdJhHQ-ht6YvhzNvye6xDXO8vhWQql2HtlI/edit#gid=726381752. Please don't hesitate to ask for help!
 
 ## Doggo Software
-The brains of Stanford Doggo are split between the ODrive motor controllers and the central Teensy microcontroller. To run Doggo, you'll need to flash the ODrive firmware onto the four motor controllers in the robot and then configure them. You'll then want to upload the Doggo code to the central microcontroller. When you power on the robot, the four legs will first do a calibration routine, and then the robot will enter an idle mode. Once in idle, you can send serial commands over the wireless xbee network to command Doggo to trot, jump, etc. Please reference the Doggo software repo for more information.
+The brains of Stanford Doggo are split between the ODrive motor controllers and the central Teensy microcontroller. To run Doggo, you'll need to flash the our custom ODrive firmware onto the four motor controllers in the robot and then configure them using the doggo_setup.py script included in that repository. Quick note, if you have a different mechanical design than Doggo, make sure to update the gear_ratio parameter in the code or via odrivetool. After uploading the firmware and configuring, you'll next want to upload the Doggo Arduino code to the central microcontroller. This code is responsible for switching between different states and sending the right position commands to the robot. When you power on the robot, the four legs will first do a calibration routine so that the motors and encoders become synced up, and then the robot will enter an idle mode. Once in idle, you can send serial commands over the wireless xbee network to command Doggo to trot, jump, etc. Please reference the Doggo software repo for more information.
 
 ## Help
 We encourage you to submit issues to this github, or email the owner, nathan kau [at] stanford [dot edu]. 
@@ -105,3 +127,61 @@ These virtual leg parameters (theta and gamma) and their corresponding virtual s
 We implemented a custom binary UART protocol to send and receive data. The binary protocol is significantly faster than the ASCII protocol, which (I think) was the only protocol implemented for the Arduino when we built the robot. If you'd like more of the specifics, visit https://github.com/Nate711/Doggo/blob/master/lib/ODriveArduino/ODriveArduino.cpp
 
 **I think that about wraps everything up! Let me know if you have questions, and I&rsquo;ll also try to update the post if people are interested in more details.**
+
+# FAQ
+## The sub-folders are empty!
+Run this to populate the folders.
+```shell
+git submodule update --init --recursive --remote
+```
+## How do I configure the ODrive parameters for Doggo?
+We use the script ```https://github.com/Nate711/ODrive/blob/master/tools/doggo_setup.py```
+## How are the legs numbered?
+Leg0 is the front left, leg1 is the back left, leg2 is the back right, and leg3 is the front right.
+## How do I calibrate the legs?
+This is a sore spot for the robot right now. When you power on the robot, all the driven linkages (ie top links) need to be as horizontal as possible. If everything is set up correctly, the motors will then begin their calibration routine which involves them rotating about 120 degrees to one side and then back. After this, the robot is ready.
+## Can it turn?
+Yes and no. It turns very slowly with the 'Y' command. The turning speed is set by 's [desired step difference]' where the step difference should be around -0.1 to 0.1 at the most.
+## Which way should the IMU point?
+There are little markings on the BNO080 board which indicate which way x is positive. Align that direction with the forward direction of the robot. The forward direction is towards the motors connected to ODrives 0 and 3. 
+## How are the ODrives connected to the Teensy?
+We use serial connections between the Teensy and ODrives so for each ODrive you'll need to connect Teensy RX to ODrive TX and Teensy TX to ODrive RX. Since there are four ODrives, you'll have to connect up four sets of these serial connections!
+
+In code we have these definitions which may help with wiring:
+```cpp
+HardwareSerial& odrv0Serial = Serial1;
+HardwareSerial& odrv1Serial = Serial2;
+HardwareSerial& odrv2Serial = Serial3;
+HardwareSerial& odrv3Serial = Serial4;
+```
+
+Here's also a little chart made by HelloPlanet!
+```
+Teensy3.5 --- Logical Function --- Component
+P0 - RX1 - ODrive1 (odrv0)
+P1 - TX1 - ODrive1 (odrv0)
+
+P7 - RX3 - ODrive3 (odrv2)
+P8 - TX3 - ODrive3 (odrv2)
+
+P9 - RX2 - ODrive2 (odrv1)
+P10 - TX2 - ODrive2 (odrv1)
+
+P31 - RX4 - ODrive4 (odrv3)
+P32 - TX4 - ODrive4 (odrv3)
+```
+## How is the Xbee wired?
+We connect it via serial to Serial5. We also have a definition in ```config.h``` called ```USE_XBEE``` that determines whether the code should use the actual USB port on the Teensy or the Xbee for communications. 
+## How is the IMU wired?
+We connect it via SPI with the following defines.
+```cpp
+//Pins for BNO080 IMU
+#define SPI_CS_PIN 15
+#define SPI_WAK_PIN 14
+#define SPI_INTPIN 17
+#define SPI_RSTPIN 16
+```
+## How does the relay get wired up?
+We now use a solid-state relay https://www.digikey.com/product-detail/en/sensata-crydom/D06D100/CC1520-ND/353618 with the output terminals in series with the main power and the input terminals connected to an external battery with a switch. We have the switch wired up in serial so that pressing the switch will turn on/off the relay and thus the robot's main power.
+## The CAD doesn't download correctly
+This is unfortunately not a problem on our end but on Fusion's. Fusion customer service has in the past been able to fix corrupted uploads on their server.
